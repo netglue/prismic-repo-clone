@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Prismic\Cloner\Factory;
+
+use Prismic\Cloner\Repository;
+use Prismic\Cloner\RepositoryContract;
+use Psr\Container\ContainerInterface;
+
+use function Psl\Type\instance_of;
+
+final readonly class RepositoryFactory
+{
+    /** @param non-empty-string $name */
+    public function __construct(private string $name)
+    {
+    }
+
+    /**
+     * @param non-empty-string $name
+     * @param list<mixed>      $arguments
+     *
+     * @psalm-suppress PossiblyUnusedMethod
+     */
+    public static function __callStatic(string $name, array $arguments): RepositoryContract
+    {
+        return (new self($name))(
+            instance_of(ContainerInterface::class)->assert(
+                $arguments[0] ?? null,
+            ),
+        );
+    }
+
+    public function __invoke(ContainerInterface $container): RepositoryContract
+    {
+        return new Repository(
+            $this->name,
+            AssetClientFactory::create($container, $this->name),
+        );
+    }
+}

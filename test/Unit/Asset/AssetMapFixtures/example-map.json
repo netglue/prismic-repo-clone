@@ -1,0 +1,135 @@
+{
+    "failures": {
+        "failed-item": {
+            "id": "failed-item",
+            "url": "https://images.prismic.io/asset-target/failed-item_prismicio.png?auto=format,compress",
+            "filename": "prismicio.png",
+            "size": 20197,
+            "width": 690,
+            "height": 400,
+            "last_modified": 1739532458857,
+            "kind": "image",
+            "extension": "png",
+            "uploader_id": "ghost",
+            "created_at": 1739532458857,
+            "tags": [],
+            "notes": null,
+            "credits": null,
+            "alt": null
+        }
+    },
+    "map": {
+        "success-1": {
+            "source": {
+                "id": "success-1",
+                "url": "https://source.cdn.prismic.io/netglue%2Fbe63241f-45a5-451e-97bb-73bd4225d3ca_some-file.xls",
+                "filename": "some-file.xls",
+                "size": 2948608,
+                "width": null,
+                "height": null,
+                "last_modified": 1496412405805,
+                "kind": "document",
+                "extension": "xls",
+                "uploader_id": "ghost",
+                "created_at": 1496412405805,
+                "tags": [],
+                "notes": null,
+                "credits": null,
+                "alt": null
+            },
+            "target": {
+                "id": "Z68ozZbqstJ9-oSS",
+                "url": "https://target.cdn.prismic.io/asset-target/Z68ozZbqstJ9-oSS_some-file.xls",
+                "filename": "some-file.xls",
+                "size": 2948608,
+                "width": null,
+                "height": null,
+                "last_modified": 1739532493887,
+                "kind": "document",
+                "extension": "xls",
+                "uploader_id": "ghost",
+                "created_at": 1739532493887,
+                "tags": [],
+                "notes": null,
+                "credits": null,
+                "alt": null
+            }
+        },
+        "success-2": {
+            "source": {
+                "id": "success-2",
+                "url": "https://images.prismic.io/netglue%2Fdf05c5d9-f287-47f9-9201-feab8f8655a8_background.jpg?auto=format,compress",
+                "filename": "Background.jpg",
+                "size": 62022,
+                "width": 1500,
+                "height": 1000,
+                "last_modified": 1441807830487,
+                "kind": "image",
+                "extension": "jpg",
+                "uploader_id": "ghost",
+                "created_at": 1441807830487,
+                "tags": [],
+                "notes": "",
+                "credits": "",
+                "alt": ""
+            },
+            "target": {
+                "id": "Z68oBpbqstJ9-oPY",
+                "url": "https://images.prismic.io/asset-target/Z68oBpbqstJ9-oPY_Background.jpg?auto=format,compress",
+                "filename": "Background.jpg",
+                "size": 62022,
+                "width": 1500,
+                "height": 1000,
+                "last_modified": 1739532294333,
+                "kind": "image",
+                "extension": "jpg",
+                "uploader_id": "ghost",
+                "created_at": 1739532294333,
+                "tags": [],
+                "notes": null,
+                "credits": null,
+                "alt": null
+            }
+        },
+        "failed-item": {
+            "source": {
+                "id": "failed-item",
+                "url": "https://images.prismic.io/asset-target/failed-item_prismicio.png?auto=format,compress",
+                "filename": "prismicio.png",
+                "size": 20197,
+                "width": 690,
+                "height": 400,
+                "last_modified": 1739532458857,
+                "kind": "image",
+                "extension": "png",
+                "uploader_id": "ghost",
+                "created_at": 1739532458857,
+                "tags": [],
+                "notes": null,
+                "credits": null,
+                "alt": null
+            },
+            "target": null
+        },
+        "pending-1": {
+            "source": {
+                "id": "pending-1",
+                "url": "https://images.prismic.io/netglue%2Fbc0e72f3-bde2-46da-8d01-c7704b2f4553_laptop.jpg?auto=format,compress",
+                "filename": "Laptop.jpg",
+                "size": 671247,
+                "width": 1920,
+                "height": 1200,
+                "last_modified": 1420839353316,
+                "kind": "image",
+                "extension": "jpg",
+                "uploader_id": "ghost",
+                "created_at": 1420839353316,
+                "tags": [],
+                "notes": "",
+                "credits": "",
+                "alt": "Whatever"
+            },
+            "target": null
+        }
+    }
+}
