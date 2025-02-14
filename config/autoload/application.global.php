@@ -19,5 +19,8 @@ return [
 
         // The file where we save the list of source assets
         'asset-list-filename' => 'asset-list.json',
+
+        // The file where we record progress on duplication of document types and slices
+        'type-definition-progress-filename' => 'document-types.json',
     ],
 ];

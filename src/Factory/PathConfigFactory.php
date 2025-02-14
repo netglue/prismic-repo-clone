@@ -20,6 +20,7 @@ final readonly class PathConfigFactory
             Dot::nonEmptyString('app.data-directory', $config),
             Dot::nonEmptyString('app.asset-map-filename', $config),
             Dot::nonEmptyString('app.asset-list-filename', $config),
+            Dot::nonEmptyString('app.type-definition-progress-filename', $config),
         );
 
         $paths->createDirectories();

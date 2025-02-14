@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Prismic\Cloner;
 
 use Prismic\Asset\Client as AssetClient;
+use Prismic\DocumentType\Client as DocumentTypeClient;
+use Prismic\DocumentType\SharedSliceManagementClient;
 
 final readonly class Repository implements RepositoryContract
 {
@@ -12,6 +14,7 @@ final readonly class Repository implements RepositoryContract
     public function __construct(
         private string $name,
         private AssetClient $assetClient,
+        private DocumentTypeClient&SharedSliceManagementClient $docTypeClient,
     ) {
     }
 
@@ -23,5 +26,10 @@ final readonly class Repository implements RepositoryContract
     public function assetClient(): AssetClient
     {
         return $this->assetClient;
+    }
+
+    public function docTypeClient(): DocumentTypeClient&SharedSliceManagementClient
+    {
+        return $this->docTypeClient;
     }
 }

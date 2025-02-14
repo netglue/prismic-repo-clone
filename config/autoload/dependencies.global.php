@@ -10,6 +10,8 @@ use League\MimeTypeDetection\MimeTypeDetector;
 use Prismic\Cloner\Asset\AssetMapper;
 use Prismic\Cloner\Asset\AssetMapperFactory;
 use Prismic\Cloner\Asset\CopyAsset;
+use Prismic\Cloner\DocumentType\CloneDocumentTypes;
+use Prismic\Cloner\DocumentType\CloneDocumentTypesFactory;
 use Prismic\Cloner\Factory\PathConfigFactory;
 use Prismic\Cloner\PathConfig;
 
@@ -23,6 +25,7 @@ return [
             CopyAsset::class => ReflectionBasedAbstractFactory::class,
             PathConfig::class => PathConfigFactory::class,
             AssetMapper::class => AssetMapperFactory::class,
+            CloneDocumentTypes::class => CloneDocumentTypesFactory::class,
         ],
         'aliases' => [
             Psr\Http\Client\ClientInterface::class => CurlClient::class,

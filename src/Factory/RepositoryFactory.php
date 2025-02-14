@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Factory;
 
+use Prismic\Cloner\Asset\AssetClientFactory;
+use Prismic\Cloner\DocumentType\DocumentTypeClientFactory;
 use Prismic\Cloner\Repository;
 use Prismic\Cloner\RepositoryContract;
 use Psr\Container\ContainerInterface;
@@ -37,6 +39,7 @@ final readonly class RepositoryFactory
         return new Repository(
             $this->name,
             AssetClientFactory::create($container, $this->name),
+            DocumentTypeClientFactory::create($container, $this->name),
         );
     }
 }
