@@ -17,6 +17,7 @@ final readonly class PathConfig
      * @param non-empty-string $assetListFilename
      * @param non-empty-string $typeDefProgressFilename
      * @param non-empty-string $typeDefinitionsFilename
+     * @param non-empty-string $documentMigrationTrackerFilename
      */
     public function __construct(
         public string $dataDirectory,
@@ -24,6 +25,7 @@ final readonly class PathConfig
         public string $assetListFilename,
         public string $typeDefProgressFilename,
         public string $typeDefinitionsFilename,
+        public string $documentMigrationTrackerFilename,
     ) {
     }
 
@@ -73,6 +75,17 @@ final readonly class PathConfig
             $this->dataDirectory,
             DIRECTORY_SEPARATOR,
             $this->typeDefinitionsFilename,
+        );
+    }
+
+    /** @return non-empty-string */
+    public function documentMigrationTrackerPath(): string
+    {
+        return sprintf(
+            '%s%s%s',
+            $this->dataDirectory,
+            DIRECTORY_SEPARATOR,
+            $this->documentMigrationTrackerFilename,
         );
     }
 }

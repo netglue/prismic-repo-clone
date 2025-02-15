@@ -25,5 +25,8 @@ return [
 
         // A file where all type definitions are stored
         'type-definitions-filename' => 'type-definitions.json',
+
+        // Where a map of migrated document id's is persisted
+        'doc-migration-tracker-filename' => 'migrated-documents.json',
     ],
 ];

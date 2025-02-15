@@ -22,6 +22,7 @@ final readonly class PathConfigFactory
             Dot::nonEmptyString('app.asset-list-filename', $config),
             Dot::nonEmptyString('app.type-definition-progress-filename', $config),
             Dot::nonEmptyString('app.type-definitions-filename', $config),
+            Dot::nonEmptyString('app.doc-migration-tracker-filename', $config),
         );
 
         $paths->createDirectories();
