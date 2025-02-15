@@ -16,12 +16,14 @@ final readonly class PathConfig
      * @param non-empty-string $assetMapFilename
      * @param non-empty-string $assetListFilename
      * @param non-empty-string $typeDefProgressFilename
+     * @param non-empty-string $typeDefinitionsFilename
      */
     public function __construct(
         public string $dataDirectory,
         public string $assetMapFilename,
         public string $assetListFilename,
         public string $typeDefProgressFilename,
+        public string $typeDefinitionsFilename,
     ) {
     }
 
@@ -60,6 +62,17 @@ final readonly class PathConfig
             $this->dataDirectory,
             DIRECTORY_SEPARATOR,
             $this->typeDefProgressFilename,
+        );
+    }
+
+    /** @return non-empty-string */
+    public function typeDefinitionsPath(): string
+    {
+        return sprintf(
+            '%s%s%s',
+            $this->dataDirectory,
+            DIRECTORY_SEPARATOR,
+            $this->typeDefinitionsFilename,
         );
     }
 }

@@ -21,6 +21,9 @@ return [
         'asset-list-filename' => 'asset-list.json',
 
         // The file where we record progress on duplication of document types and slices
-        'type-definition-progress-filename' => 'document-types.json',
+        'type-definition-progress-filename' => 'doc-type-progress.json',
+
+        // A file where all type definitions are stored
+        'type-definitions-filename' => 'type-definitions.json',
     ],
 ];

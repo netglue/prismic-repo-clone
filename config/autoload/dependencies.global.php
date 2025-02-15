@@ -12,6 +12,8 @@ use Prismic\Cloner\Asset\AssetMapperFactory;
 use Prismic\Cloner\Asset\CopyAsset;
 use Prismic\Cloner\DocumentType\CloneDocumentTypes;
 use Prismic\Cloner\DocumentType\CloneDocumentTypesFactory;
+use Prismic\Cloner\DocumentType\DocumentTypes;
+use Prismic\Cloner\DocumentType\DocumentTypesFactory;
 use Prismic\Cloner\Factory\PathConfigFactory;
 use Prismic\Cloner\PathConfig;
 
@@ -26,6 +28,7 @@ return [
             PathConfig::class => PathConfigFactory::class,
             AssetMapper::class => AssetMapperFactory::class,
             CloneDocumentTypes::class => CloneDocumentTypesFactory::class,
+            DocumentTypes::class => DocumentTypesFactory::class,
         ],
         'aliases' => [
             Psr\Http\Client\ClientInterface::class => CurlClient::class,

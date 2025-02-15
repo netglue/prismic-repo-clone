@@ -18,6 +18,7 @@ final readonly class CloneDocumentTypesFactory
         return new CloneDocumentTypes(
             $container->get(SourceRepository::class),
             $container->get(TargetRepository::class),
+            $container->get(DocumentTypes::class),
             $paths->typeDefProgressPath(),
         );
     }

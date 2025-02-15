@@ -1,0 +1,16 @@
+[
+    {
+        "id": "some-type",
+        "label": "Some Label",
+        "repeatable": true,
+        "status": true,
+        "json": []
+    },
+    {
+        "id": "other",
+        "label": "Other Label",
+        "repeatable": true,
+        "status": true,
+        "json": []
+    }
+]

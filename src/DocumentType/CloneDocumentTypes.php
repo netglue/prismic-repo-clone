@@ -44,6 +44,7 @@ final class CloneDocumentTypes
     public function __construct(
         private readonly RepositoryContract $source,
         private readonly RepositoryContract $target,
+        private readonly DocumentTypes $documentTypes,
         private readonly string $progressFilePath,
     ) {
     }
@@ -58,8 +59,10 @@ final class CloneDocumentTypes
     private function initialize(): void
     {
         if (! exists($this->progressFilePath)) {
-            $types = $this->source->docTypeClient()->fetchAllDefinitions();
-            $this->typesToCopy = values(map($types, static fn (Definition $definition): string => $definition->id()));
+            $this->typesToCopy = values(map(
+                $this->documentTypes,
+                static fn (Definition $definition): string => $definition->id(),
+            ));
             $slices = $this->source->docTypeClient()->fetchAllSharedSlices();
             $this->slicesToCopy = values(map($slices, static fn (SharedSlice $slice): string => $slice->id));
 
