@@ -14,7 +14,7 @@ use function Psl\Filesystem\delete_file;
 use function Psl\Filesystem\exists;
 use function Psl\Json\encode;
 
-class DocumentTypesTest extends TestCase
+final class DocumentTypesTest extends TestCase
 {
     /** @var non-empty-string */
     private string $workingPath;

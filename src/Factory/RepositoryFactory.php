@@ -6,6 +6,8 @@ namespace Prismic\Cloner\Factory;
 
 use Prismic\Cloner\Asset\AssetClientFactory;
 use Prismic\Cloner\DocumentType\DocumentTypeClientFactory;
+use Prismic\Cloner\Migration\DocumentClientFactory;
+use Prismic\Cloner\Migration\MigrationClientFactory;
 use Prismic\Cloner\Repository;
 use Prismic\Cloner\RepositoryContract;
 use Psr\Container\ContainerInterface;
@@ -40,6 +42,8 @@ final readonly class RepositoryFactory
             $this->name,
             AssetClientFactory::create($container, $this->name),
             DocumentTypeClientFactory::create($container, $this->name),
+            DocumentClientFactory::create($container, $this->name),
+            MigrationClientFactory::create($container, $this->name),
         );
     }
 }
