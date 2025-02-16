@@ -8,7 +8,7 @@ on:
 
 env:
   php_extensions: ctype,intl,json,libxml,mbstring
-  default_php: 8.3
+  default_php: 8.4
 
 jobs:
   ci:
