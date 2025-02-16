@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Prismic\Cloner\Migration;
+namespace Prismic\Cloner\Migration\Factory;
 
 use GSteel\Dot;
 use Prismic\Migration\DocumentClient;

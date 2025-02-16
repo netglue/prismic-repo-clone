@@ -6,8 +6,8 @@ namespace Prismic\Cloner\Factory;
 
 use Prismic\Cloner\Asset\AssetClientFactory;
 use Prismic\Cloner\DocumentType\DocumentTypeClientFactory;
-use Prismic\Cloner\Migration\DocumentClientFactory;
-use Prismic\Cloner\Migration\MigrationClientFactory;
+use Prismic\Cloner\Migration\Factory\DocumentClientFactory;
+use Prismic\Cloner\Migration\Factory\MigrationClientFactory;
 use Prismic\Cloner\Repository;
 use Prismic\Cloner\RepositoryContract;
 use Psr\Container\ContainerInterface;
