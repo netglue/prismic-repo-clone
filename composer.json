@@ -34,6 +34,7 @@
         "laminas/laminas-servicemanager": "^4.4",
         "league/mime-type-detection": "^1.16",
         "netglue/prismic-asset-api-client": "^1.0",
+        "netglue/prismic-cli": "^1.10",
         "netglue/prismic-client": "^1.13",
         "netglue/prismic-doctype-client": "^1.7",
         "netglue/prismic-migration-client": "^1.0.x-dev",

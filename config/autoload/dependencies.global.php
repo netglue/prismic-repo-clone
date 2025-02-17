@@ -15,8 +15,10 @@ use Prismic\Cloner\DocumentType\CloneDocumentTypesFactory;
 use Prismic\Cloner\DocumentType\DocumentTypes;
 use Prismic\Cloner\DocumentType\DocumentTypesFactory;
 use Prismic\Cloner\Factory\PathConfigFactory;
+use Prismic\Cloner\Migration\DefaultTitleResolver;
 use Prismic\Cloner\Migration\DocumentMigrationTracker;
 use Prismic\Cloner\Migration\Factory\DocumentMigrationTrackerFactory;
+use Prismic\Cloner\Migration\TitleResolver;
 use Prismic\Cloner\PathConfig;
 
 // phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly
@@ -32,10 +34,12 @@ return [
             CloneDocumentTypes::class => CloneDocumentTypesFactory::class,
             DocumentTypes::class => DocumentTypesFactory::class,
             DocumentMigrationTracker::class => DocumentMigrationTrackerFactory::class,
+            DefaultTitleResolver::class => ReflectionBasedAbstractFactory::class,
         ],
         'aliases' => [
             Psr\Http\Client\ClientInterface::class => CurlClient::class,
             MimeTypeDetector::class => FinfoMimeTypeDetector::class,
+            TitleResolver::class => DefaultTitleResolver::class,
         ],
     ],
 ];
