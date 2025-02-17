@@ -8,6 +8,7 @@ use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 use Prismic\Cloner\Migration\DocumentMigrationTracker;
 
+use function iterator_to_array;
 use function Psl\Filesystem\delete_file;
 use function Psl\Filesystem\exists;
 
@@ -71,5 +72,17 @@ final class DocumentMigrationTrackerTest extends TestCase
         $tracker = DocumentMigrationTracker::fromFile($this->workingPath);
         $this->expectException(BadMethodCallException::class);
         $tracker->getTarget('foo');
+    }
+
+    public function testIteration(): void
+    {
+        $tracker = DocumentMigrationTracker::fromFile($this->workingPath);
+        $tracker->migrate('foo', 'bar');
+        $tracker->migrate('baz', 'bat');
+
+        self::assertSame(
+            ['foo' => 'bar', 'baz' => 'bat'],
+            iterator_to_array($tracker),
+        );
     }
 }

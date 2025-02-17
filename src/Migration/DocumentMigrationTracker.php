@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Migration;
 
+use ArrayIterator;
 use BadMethodCallException;
+use IteratorAggregate;
 use Psl\File\WriteMode;
+use Traversable;
 
 use function array_key_exists;
 use function Psl\File\read;
@@ -17,7 +20,8 @@ use function Psl\Type\dict;
 use function Psl\Type\non_empty_string;
 use function sprintf;
 
-final class DocumentMigrationTracker
+/** @implements IteratorAggregate<non-empty-string, non-empty-string> */
+final class DocumentMigrationTracker implements IteratorAggregate
 {
     /**
      * @param non-empty-string                          $filePath
@@ -93,5 +97,12 @@ final class DocumentMigrationTracker
             encode($this->map, true),
             WriteMode::Truncate,
         );
+    }
+
+    /** @return Traversable<non-empty-string, non-empty-string> */
+    public function getIterator(): Traversable
+    {
+        /** @phpstan-ignore return.type */
+        return new ArrayIterator($this->map);
     }
 }
