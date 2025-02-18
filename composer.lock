@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b26b50cd1d4d710a82877da9c132215",
+    "content-hash": "b16cabad3647d399cf91327dccedbe90",
     "packages": [
         {
             "name": "azjezz/psl",
@@ -196,16 +196,16 @@
         },
         {
             "name": "cuyz/valinor",
-            "version": "1.14.2",
+            "version": "1.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CuyZ/Valinor.git",
-                "reference": "1881c77d555b00c2f969dfbbc2c7dbd939ae97ea"
+                "reference": "1d75537ea0141452f65dc340e4932015592537e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CuyZ/Valinor/zipball/1881c77d555b00c2f969dfbbc2c7dbd939ae97ea",
-                "reference": "1881c77d555b00c2f969dfbbc2c7dbd939ae97ea",
+                "url": "https://api.github.com/repos/CuyZ/Valinor/zipball/1d75537ea0141452f65dc340e4932015592537e2",
+                "reference": "1d75537ea0141452f65dc340e4932015592537e2",
                 "shasum": ""
             },
             "require": {
@@ -218,6 +218,7 @@
                 "infection/infection": "^0.27",
                 "marcocesarato/php-conventional-changelog": "^1.12",
                 "mikey179/vfsstream": "^1.6.10",
+                "phpbench/phpbench": "^1.3",
                 "phpstan/phpstan": "^2.0",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
@@ -257,7 +258,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CuyZ/Valinor/issues",
-                "source": "https://github.com/CuyZ/Valinor/tree/1.14.2"
+                "source": "https://github.com/CuyZ/Valinor/tree/1.14.3"
             },
             "funding": [
                 {
@@ -265,7 +266,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-09T09:48:05+00:00"
+            "time": "2025-02-17T18:33:46+00:00"
         },
         {
             "name": "fig/http-message-util",
@@ -1155,12 +1156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/netglue/prismic-migration-client.git",
-                "reference": "f0939255298e5d74ff5a59d68c0f313684aa9346"
+                "reference": "e7b195999c880ad59210442a75e8f76818b349a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/netglue/prismic-migration-client/zipball/f0939255298e5d74ff5a59d68c0f313684aa9346",
-                "reference": "f0939255298e5d74ff5a59d68c0f313684aa9346",
+                "url": "https://api.github.com/repos/netglue/prismic-migration-client/zipball/e7b195999c880ad59210442a75e8f76818b349a2",
+                "reference": "e7b195999c880ad59210442a75e8f76818b349a2",
                 "shasum": ""
             },
             "require": {
@@ -1210,7 +1211,7 @@
                 "issues": "https://github.com/netglue/prismic-migration-client/issues",
                 "source": "https://github.com/netglue/prismic-migration-client/tree/1.0.x"
             },
-            "time": "2025-02-17T16:37:20+00:00"
+            "time": "2025-02-18T21:48:46+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -5310,16 +5311,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "12.0.2",
+            "version": "12.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "69dde560510151f7d04315fac6c72016cc5d7bc8"
+                "reference": "2e3038bff41d56114e5396151060f5ac9d2d6751"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/69dde560510151f7d04315fac6c72016cc5d7bc8",
-                "reference": "69dde560510151f7d04315fac6c72016cc5d7bc8",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2e3038bff41d56114e5396151060f5ac9d2d6751",
+                "reference": "2e3038bff41d56114e5396151060f5ac9d2d6751",
                 "shasum": ""
             },
             "require": {
@@ -5375,7 +5376,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.0.2"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.0.3"
             },
             "funding": [
                 {
@@ -5383,7 +5384,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-08T09:08:00+00:00"
+            "time": "2025-02-18T14:04:13+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5632,16 +5633,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.0.2",
+            "version": "12.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6301fe5c1f5f34192ffd650a87fe055677a32212"
+                "reference": "df170d66e1dbb8ff0f21c9be2e7d7726bebc57ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6301fe5c1f5f34192ffd650a87fe055677a32212",
-                "reference": "6301fe5c1f5f34192ffd650a87fe055677a32212",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/df170d66e1dbb8ff0f21c9be2e7d7726bebc57ed",
+                "reference": "df170d66e1dbb8ff0f21c9be2e7d7726bebc57ed",
                 "shasum": ""
             },
             "require": {
@@ -5709,7 +5710,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.0.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.0.3"
             },
             "funding": [
                 {
@@ -5725,7 +5726,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-08T09:18:47+00:00"
+            "time": "2025-02-18T06:28:55+00:00"
         },
         {
             "name": "psalm/plugin-phpunit",

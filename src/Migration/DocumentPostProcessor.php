@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Migration;
 
-use Fig\Http\Message\StatusCodeInterface;
 use Prismic\Cloner\RepositoryContract;
 use Prismic\Cloner\Transformer\Transformer;
-use Prismic\Migration\Exception\RequestFailure;
+use Prismic\Migration\Exception\AssetNotFound;
+use Prismic\Migration\Exception\GenericRequestFailure;
+use Prismic\Migration\Exception\RateLimitExceeded;
 use Prismic\Migration\Model\Document;
 use Prismic\Migration\Model\MigrationDocumentPatch;
 
-use function json_validate;
-use function Psl\Json\decode;
-use function Psl\Json\encode;
 use function Psl\Type\non_empty_string;
 use function sleep;
 use function sprintf;
@@ -65,25 +63,18 @@ final readonly class DocumentPostProcessor
 
         try {
             $this->target->migrationClient()->updateDocument($patch);
-        } catch (RequestFailure $error) {
-            if ($error->getCode() === StatusCodeInterface::STATUS_TOO_MANY_REQUESTS) {
-                throw new RateLimitExceeded();
-            }
-
+        } catch (RateLimitExceeded | AssetNotFound $error) {
+            throw $error;
+        } catch (GenericRequestFailure $error) {
             $message = sprintf(
-                'Failed to perform post-migration on document "%s". (UID: %s, Type: %s)',
+                'Failed to perform post-migration on document "%s". (UID: %s, Type: %s)%s%s',
                 $document->id,
                 $document->uid ?? '[none]',
                 $document->type,
+                PHP_EOL,
+                $error->getMessage(),
             );
 
-            $body = (string) $error->response->getBody();
-            if (json_validate($body)) {
-                $errorList = encode(decode($body), true);
-                $message .= '. Errors: ' . PHP_EOL . $errorList;
-            }
-
-            /** @psalm-suppress PossiblyInvalidArgument */
             throw new DocumentMigrationFailure($message, $error->getCode(), $error);
         }
 

@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Migration;
 
-use Fig\Http\Message\StatusCodeInterface;
 use Prismic\Cloner\RepositoryContract;
 use Prismic\Cloner\Transformer\Transformer;
-use Prismic\Migration\Exception\RequestFailure;
+use Prismic\Migration\Exception\AssetNotFound;
+use Prismic\Migration\Exception\GenericRequestFailure;
+use Prismic\Migration\Exception\RateLimitExceeded;
 use Prismic\Migration\Model\Document;
 use Prismic\Migration\Model\MigrationDocument;
 
-use function json_validate;
-use function Psl\Json\decode;
-use function Psl\Json\encode;
 use function sleep;
 use function sprintf;
 
@@ -66,25 +64,18 @@ final readonly class DocumentMigrator
 
         try {
             $result = $this->target->migrationClient()->createDocument($migration);
-        } catch (RequestFailure $e) {
-            if ($e->getCode() === StatusCodeInterface::STATUS_TOO_MANY_REQUESTS) {
-                throw new RateLimitExceeded();
-            }
-
+        } catch (RateLimitExceeded | AssetNotFound $error) {
+            throw $error;
+        } catch (GenericRequestFailure $e) {
             $message = sprintf(
-                'Failed to migrate document "%s". (UID: %s, Type: %s)',
+                'Failed to migrate document "%s". (UID: %s, Type: %s)%s%s',
                 $document->id,
                 $document->uid ?? '[none]',
                 $document->type,
+                PHP_EOL,
+                $e->getMessage(),
             );
 
-            $body = (string) $e->response->getBody();
-            if (json_validate($body)) {
-                $errorList = encode(decode($body), true);
-                $message .= '. Errors: ' . PHP_EOL . $errorList;
-            }
-
-            /** @psalm-suppress PossiblyInvalidArgument */
             throw new DocumentMigrationFailure($message, $e->getCode(), $e);
         }
 
