@@ -19,6 +19,7 @@ final readonly class PathConfig
      * @param non-empty-string $typeDefinitionsFilename
      * @param non-empty-string $documentMigrationTrackerFilename
      * @param non-empty-string $documentCacheDirectoryName
+     * @param non-empty-string $patchTrackerFileName
      */
     public function __construct(
         public string $dataDirectory,
@@ -28,6 +29,7 @@ final readonly class PathConfig
         public string $typeDefinitionsFilename,
         public string $documentMigrationTrackerFilename,
         public string $documentCacheDirectoryName,
+        public string $patchTrackerFileName,
     ) {
     }
 
@@ -89,6 +91,17 @@ final readonly class PathConfig
             $this->dataDirectory,
             DIRECTORY_SEPARATOR,
             $this->documentMigrationTrackerFilename,
+        );
+    }
+
+    /** @return non-empty-string */
+    public function patchTrackerFilePath(): string
+    {
+        return sprintf(
+            '%s%s%s',
+            $this->dataDirectory,
+            DIRECTORY_SEPARATOR,
+            $this->patchTrackerFileName,
         );
     }
 

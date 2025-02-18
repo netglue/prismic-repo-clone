@@ -29,6 +29,9 @@ return [
         // Where a map of migrated document id's is persisted
         'doc-migration-tracker-filename' => 'migrated-documents.json',
 
+        // Where we record the list of documents that have been post-processed
+        'patch-tracker-filename' => 'patched-documents.json',
+
         // Where cached document json is persisted per repository
         'document-cache-directory-name' => 'documents',
     ],

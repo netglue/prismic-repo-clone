@@ -18,9 +18,13 @@ use Prismic\Cloner\Factory\PathConfigFactory;
 use Prismic\Cloner\Migration\DefaultTitleResolver;
 use Prismic\Cloner\Migration\DocumentMigrationTracker;
 use Prismic\Cloner\Migration\DocumentMigrator;
+use Prismic\Cloner\Migration\DocumentPatchTracker;
 use Prismic\Cloner\Migration\Factory\DocumentMigrationTrackerFactory;
 use Prismic\Cloner\Migration\Factory\DocumentMigratorFactory;
+use Prismic\Cloner\Migration\Factory\DocumentPatchTrackerFactory;
+use Prismic\Cloner\Migration\Factory\DocumentPostProcessorFactory;
 use Prismic\Cloner\Migration\Factory\TitleResolverFactory;
+use Prismic\Cloner\Migration\DocumentPostProcessor;
 use Prismic\Cloner\Migration\ResolveSinglesToTypeLabel;
 use Prismic\Cloner\Migration\TitleResolver;
 use Prismic\Cloner\PathConfig;
@@ -59,6 +63,8 @@ return [
             AdjustInternalLinks::class => ReflectionBasedAbstractFactory::class,
             PreTransform::class => PreTransformFactory::class,
             PostTransform::class => PostTransformFactory::class,
+            DocumentPostProcessor::class => DocumentPostProcessorFactory::class,
+            DocumentPatchTracker::class => DocumentPatchTrackerFactory::class,
         ],
         'aliases' => [
             Psr\Http\Client\ClientInterface::class => CurlClient::class,

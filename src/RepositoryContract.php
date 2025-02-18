@@ -29,4 +29,7 @@ interface RepositoryContract
     public function fetchDocuments(): iterable;
 
     public function persistDocumentState(Document $document): void;
+
+    /** @param non-empty-string $id */
+    public function getDocumentState(string $id): Document;
 }

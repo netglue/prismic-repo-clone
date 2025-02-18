@@ -36,4 +36,4 @@ php bin/run.php
 - _All_ document type definitions are cloned from source to target along with any shared slices. Again, these are tracked, so can be retried if any errors occur during transfer.
 - _All_ source documents are downloaded at the **master ref**.
 - Works through source documents one at a time, adjusting image identifiers and sends the data to the target migration release.
-- TODO - Once all documents are processed, adjust all internal document links to point at the new equivalent document.
+- Once all documents are processed, all internal document links are updated to point at the new equivalent document.
