@@ -9,6 +9,7 @@ use Prismic\DocumentType\Client as DocumentTypeClient;
 use Prismic\DocumentType\SharedSliceManagementClient;
 use Prismic\Migration\DocumentClient;
 use Prismic\Migration\MigrationClient;
+use Prismic\Migration\Model\Document;
 
 /** @psalm-api */
 interface RepositoryContract
@@ -23,4 +24,9 @@ interface RepositoryContract
     public function documentClient(): DocumentClient;
 
     public function migrationClient(): MigrationClient;
+
+    /** @return iterable<Document> */
+    public function fetchDocuments(): iterable;
+
+    public function persistDocumentState(Document $document): void;
 }

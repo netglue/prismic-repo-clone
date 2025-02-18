@@ -2,4 +2,6 @@
 /var/cache/*
 !/var/cache/.gitkeep
 rector.php
-.env
+.env.netglue-to-asset-target.env
+*.env
+config/**/*local.*

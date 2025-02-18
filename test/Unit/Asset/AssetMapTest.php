@@ -6,6 +6,7 @@ namespace App\Test\Unit\Asset;
 
 use BadMethodCallException;
 use InvalidArgumentException;
+use Override;
 use PHPUnit\Framework\TestCase;
 use Prismic\Cloner\Asset\AssetMap;
 use Prismic\Cloner\Asset\AssetPair;
@@ -19,11 +20,13 @@ final class AssetMapTest extends TestCase
     /** @var non-empty-string */
     private string $workingPath;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->workingPath = __DIR__ . '/AssetMapFixtures/working.json';
     }
 
+    #[Override]
     protected function tearDown(): void
     {
         if (! exists($this->workingPath)) {

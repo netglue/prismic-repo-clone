@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Migration;
 
+use Override;
 use Primo\Cli\TypeBuilder;
 use Prismic\Cloner\DocumentType\DocumentTypes;
 use Prismic\DocumentType\Definition;
@@ -33,6 +34,7 @@ final readonly class DefaultTitleResolver implements TitleResolver
     }
 
     /** @return non-empty-string|null */
+    #[Override]
     public function resolve(Document $document): string|null
     {
         $type = $this->types->get($document->type);

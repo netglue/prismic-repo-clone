@@ -8,6 +8,7 @@ use Prismic\Cloner\Asset\AssetClientFactory;
 use Prismic\Cloner\DocumentType\DocumentTypeClientFactory;
 use Prismic\Cloner\Migration\Factory\DocumentClientFactory;
 use Prismic\Cloner\Migration\Factory\MigrationClientFactory;
+use Prismic\Cloner\PathConfig;
 use Prismic\Cloner\Repository;
 use Prismic\Cloner\RepositoryContract;
 use Psr\Container\ContainerInterface;
@@ -38,12 +39,15 @@ final readonly class RepositoryFactory
 
     public function __invoke(ContainerInterface $container): RepositoryContract
     {
+        $paths = $container->get(PathConfig::class);
+
         return new Repository(
             $this->name,
             AssetClientFactory::create($container, $this->name),
             DocumentTypeClientFactory::create($container, $this->name),
             DocumentClientFactory::create($container, $this->name),
             MigrationClientFactory::create($container, $this->name),
+            $paths->repositoryDocumentCache($this->name),
         );
     }
 }

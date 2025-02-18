@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Asset;
 
+use ArrayIterator;
 use BadMethodCallException;
 use Closure;
 use CuyZ\Valinor\Mapper\Source\JsonSource;
 use CuyZ\Valinor\MapperBuilder;
 use InvalidArgumentException;
+use IteratorAggregate;
+use Override;
 use Prismic\Asset\Model\Asset;
 use Psl\File\WriteMode;
+use Traversable;
 
 use function array_key_exists;
 use function count;
@@ -18,8 +22,11 @@ use function Psl\File\read;
 use function Psl\File\write;
 use function Psl\Json\encode;
 
-/** @psalm-api */
-final class AssetMap
+/**
+ * @implements IteratorAggregate<string, AssetPair>
+ * @psalm-api
+ */
+final class AssetMap implements IteratorAggregate
 {
     /**
      * @param array<string, AssetPair>       $map
@@ -163,5 +170,12 @@ final class AssetMap
     public function countFailures(): int
     {
         return count($this->failures);
+    }
+
+    /** @return Traversable<string, AssetPair> */
+    #[Override]
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->map);
     }
 }

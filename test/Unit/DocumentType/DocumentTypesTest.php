@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Test\Unit\DocumentType;
 
 use InvalidArgumentException;
+use Override;
 use PHPUnit\Framework\TestCase;
 use Prismic\Cloner\DocumentType\DocumentTypes;
 use Prismic\DocumentType\Definition;
@@ -19,11 +20,13 @@ final class DocumentTypesTest extends TestCase
     /** @var non-empty-string */
     private string $workingPath;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->workingPath = __DIR__ . '/DocumentTypeFixtures/working.json';
     }
 
+    #[Override]
     protected function tearDown(): void
     {
         if (! exists($this->workingPath)) {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Test\Unit\Migration;
 
 use BadMethodCallException;
+use Override;
 use PHPUnit\Framework\TestCase;
 use Prismic\Cloner\Migration\DocumentMigrationTracker;
 
@@ -17,11 +18,13 @@ final class DocumentMigrationTrackerTest extends TestCase
     /** @var non-empty-string */
     private string $workingPath;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->workingPath = __DIR__ . '/working.json';
     }
 
+    #[Override]
     protected function tearDown(): void
     {
         if (! exists($this->workingPath)) {
@@ -84,5 +87,32 @@ final class DocumentMigrationTrackerTest extends TestCase
             ['foo' => 'bar', 'baz' => 'bat'],
             iterator_to_array($tracker),
         );
+    }
+
+    public function testSourceRegistration(): void
+    {
+        $tracker = DocumentMigrationTracker::fromFile($this->workingPath);
+        $tracker->registerSource('foo');
+        self::assertFalse($tracker->isMigrated('foo'));
+
+        self::assertSame(['foo' => null], iterator_to_array($tracker));
+    }
+
+    public function testYouCannotRegisterASourceTwice(): void
+    {
+        $tracker = DocumentMigrationTracker::fromFile($this->workingPath);
+        $tracker->registerSource('foo');
+
+        $this->expectException(BadMethodCallException::class);
+        $tracker->registerSource('foo');
+    }
+
+    public function testTheTrackerIsCountable(): void
+    {
+        $tracker = DocumentMigrationTracker::fromFile($this->workingPath);
+        $tracker->registerSource('foo');
+        self::assertEquals(1, $tracker->count());
+        $tracker->registerSource('bar');
+        self::assertEquals(2, $tracker->count());
     }
 }

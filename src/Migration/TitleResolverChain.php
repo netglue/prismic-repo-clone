@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Prismic\Cloner\Migration;
 
+use Override;
 use Prismic\Migration\Model\Document;
 
 use function Psl\Vec\values;
@@ -19,6 +20,7 @@ final readonly class TitleResolverChain implements TitleResolver
         $this->resolvers = values($resolvers);
     }
 
+    #[Override]
     public function resolve(Document $document): string|null
     {
         foreach ($this->resolvers as $resolver) {

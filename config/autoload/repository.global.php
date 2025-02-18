@@ -30,6 +30,12 @@ return [
             'name' => $_ENV['TARGET_REPO'],
             'writeToken' => $_ENV['TARGET_WRITE_TOKEN'],
             'readToken' => $_ENV['TARGET_READ_TOKEN'],
+            /**
+             * If you are copying from a repo in say 'en-us' and need the target to be 'en-gb', you can supply a
+             * 'forceLanguage' option to override the language of the source document.
+             * Bear in mind this is not going to be very helpful for multi-language repos
+             */
+            //'forceLanguage' => 'en-gb',
         ],
     ],
 

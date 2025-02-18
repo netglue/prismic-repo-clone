@@ -8,6 +8,7 @@ use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
+use Override;
 use Prismic\DocumentType\Definition;
 use Psl\File\WriteMode;
 use Traversable;
@@ -82,11 +83,13 @@ final readonly class DocumentTypes implements IteratorAggregate, Countable
     }
 
     /** @return Traversable<int, Definition> */
+    #[Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->types);
     }
 
+    #[Override]
     public function count(): int
     {
         return count($this->types);

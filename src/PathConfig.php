@@ -18,6 +18,7 @@ final readonly class PathConfig
      * @param non-empty-string $typeDefProgressFilename
      * @param non-empty-string $typeDefinitionsFilename
      * @param non-empty-string $documentMigrationTrackerFilename
+     * @param non-empty-string $documentCacheDirectoryName
      */
     public function __construct(
         public string $dataDirectory,
@@ -26,12 +27,14 @@ final readonly class PathConfig
         public string $typeDefProgressFilename,
         public string $typeDefinitionsFilename,
         public string $documentMigrationTrackerFilename,
+        public string $documentCacheDirectoryName,
     ) {
     }
 
     public function createDirectories(): void
     {
         create_directory($this->dataDirectory);
+        create_directory($this->documentCacheDirectory());
     }
 
     /** @return non-empty-string */
@@ -87,5 +90,35 @@ final readonly class PathConfig
             DIRECTORY_SEPARATOR,
             $this->documentMigrationTrackerFilename,
         );
+    }
+
+    /** @return non-empty-string */
+    public function documentCacheDirectory(): string
+    {
+        return sprintf(
+            '%s%s%s',
+            $this->dataDirectory,
+            DIRECTORY_SEPARATOR,
+            $this->documentCacheDirectoryName,
+        );
+    }
+
+    /**
+     * @param non-empty-string $name
+     *
+     * @return non-empty-string
+     */
+    public function repositoryDocumentCache(string $name): string
+    {
+        $directory = sprintf(
+            '%s%s%s',
+            $this->documentCacheDirectory(),
+            DIRECTORY_SEPARATOR,
+            $name,
+        );
+
+        create_directory($directory);
+
+        return $directory;
     }
 }

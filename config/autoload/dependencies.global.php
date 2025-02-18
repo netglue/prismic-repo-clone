@@ -17,29 +17,52 @@ use Prismic\Cloner\DocumentType\DocumentTypesFactory;
 use Prismic\Cloner\Factory\PathConfigFactory;
 use Prismic\Cloner\Migration\DefaultTitleResolver;
 use Prismic\Cloner\Migration\DocumentMigrationTracker;
+use Prismic\Cloner\Migration\DocumentMigrator;
 use Prismic\Cloner\Migration\Factory\DocumentMigrationTrackerFactory;
+use Prismic\Cloner\Migration\Factory\DocumentMigratorFactory;
+use Prismic\Cloner\Migration\Factory\TitleResolverFactory;
+use Prismic\Cloner\Migration\ResolveSinglesToTypeLabel;
 use Prismic\Cloner\Migration\TitleResolver;
 use Prismic\Cloner\PathConfig;
+use Prismic\Cloner\Transformer\AdjustInternalLinks;
+use Prismic\Cloner\Transformer\FixAssetIdentifiers;
+use Prismic\Cloner\Transformer\PostTransform;
+use Prismic\Cloner\Transformer\PostTransformFactory;
+use Prismic\Cloner\Transformer\PreTransform;
+use Prismic\Cloner\Transformer\PreTransformFactory;
 
 // phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly
 
 return [
     'dependencies' => [
         'factories' => [
+            // Utils, generic deps
             CurlClient::class => InvokableFactory::class,
             FinfoMimeTypeDetector::class => InvokableFactory::class,
-            CopyAsset::class => ReflectionBasedAbstractFactory::class,
+
+            // Main tooling services
             PathConfig::class => PathConfigFactory::class,
+            CopyAsset::class => ReflectionBasedAbstractFactory::class,
             AssetMapper::class => AssetMapperFactory::class,
             CloneDocumentTypes::class => CloneDocumentTypesFactory::class,
             DocumentTypes::class => DocumentTypesFactory::class,
             DocumentMigrationTracker::class => DocumentMigrationTrackerFactory::class,
+            DocumentMigrator::class => DocumentMigratorFactory::class,
+
+            // Tools for figuring out the document title
             DefaultTitleResolver::class => ReflectionBasedAbstractFactory::class,
+            ResolveSinglesToTypeLabel::class => ReflectionBasedAbstractFactory::class,
+            TitleResolver::class => TitleResolverFactory::class,
+
+            // Tools for pre- and post-processing the documents
+            FixAssetIdentifiers::class => ReflectionBasedAbstractFactory::class,
+            AdjustInternalLinks::class => ReflectionBasedAbstractFactory::class,
+            PreTransform::class => PreTransformFactory::class,
+            PostTransform::class => PostTransformFactory::class,
         ],
         'aliases' => [
             Psr\Http\Client\ClientInterface::class => CurlClient::class,
             MimeTypeDetector::class => FinfoMimeTypeDetector::class,
-            TitleResolver::class => DefaultTitleResolver::class,
         ],
     ],
 ];

@@ -6,11 +6,14 @@ namespace Prismic\Cloner\Migration;
 
 use ArrayIterator;
 use BadMethodCallException;
+use Countable;
 use IteratorAggregate;
+use Override;
 use Psl\File\WriteMode;
 use Traversable;
 
 use function array_key_exists;
+use function count;
 use function Psl\File\read;
 use function Psl\File\write;
 use function Psl\Filesystem\exists;
@@ -18,14 +21,16 @@ use function Psl\Json\encode;
 use function Psl\Json\typed;
 use function Psl\Type\dict;
 use function Psl\Type\non_empty_string;
+use function Psl\Type\null;
+use function Psl\Type\union;
 use function sprintf;
 
-/** @implements IteratorAggregate<non-empty-string, non-empty-string> */
-final class DocumentMigrationTracker implements IteratorAggregate
+/** @implements IteratorAggregate<non-empty-string, non-empty-string|null> */
+final class DocumentMigrationTracker implements IteratorAggregate, Countable
 {
     /**
-     * @param non-empty-string                          $filePath
-     * @param array<non-empty-string, non-empty-string> $map
+     * @param non-empty-string                               $filePath
+     * @param array<non-empty-string, non-empty-string|null> $map
      */
     private function __construct(
         private readonly string $filePath,
@@ -37,7 +42,7 @@ final class DocumentMigrationTracker implements IteratorAggregate
     public static function fromFile(string $filePath): self
     {
         if (exists($filePath)) {
-            $map = typed(read($filePath), dict(non_empty_string(), non_empty_string()));
+            $map = typed(read($filePath), dict(non_empty_string(), union(non_empty_string(), null())));
 
             /** @phpstan-ignore argument.type */
             return new self($filePath, $map);
@@ -52,7 +57,7 @@ final class DocumentMigrationTracker implements IteratorAggregate
     /** @param non-empty-string $sourceId */
     public function isMigrated(string $sourceId): bool
     {
-        return array_key_exists($sourceId, $this->map);
+        return array_key_exists($sourceId, $this->map) && $this->map[$sourceId] !== null;
     }
 
     /**
@@ -62,15 +67,34 @@ final class DocumentMigrationTracker implements IteratorAggregate
      */
     public function getTarget(string $sourceId): string
     {
-        $target = $this->map[$sourceId] ?? null;
-        if ($target !== null) {
-            return $target;
+        if (! $this->isMigrated($sourceId)) {
+            throw new BadMethodCallException(sprintf(
+                '"%s" has not been migrated yet',
+                $sourceId,
+            ));
         }
 
-        throw new BadMethodCallException(sprintf(
-            '"%s" has not been migrated yet',
-            $sourceId,
-        ));
+        return non_empty_string()->assert($this->map[$sourceId]);
+    }
+
+    /** @param non-empty-string $sourceId */
+    public function registerSource(string $sourceId): void
+    {
+        if (array_key_exists($sourceId, $this->map)) {
+            throw new BadMethodCallException(sprintf(
+                'Document "%s" is already registered',
+                $sourceId,
+            ));
+        }
+
+        $this->map[$sourceId] = null;
+        $this->freeze();
+    }
+
+    /** @param non-empty-string $sourceId */
+    public function isRegistered(string $sourceId): bool
+    {
+        return array_key_exists($sourceId, $this->map);
     }
 
     /**
@@ -99,10 +123,17 @@ final class DocumentMigrationTracker implements IteratorAggregate
         );
     }
 
-    /** @return Traversable<non-empty-string, non-empty-string> */
+    /** @return Traversable<non-empty-string, non-empty-string|null> */
+    #[Override]
     public function getIterator(): Traversable
     {
         /** @phpstan-ignore return.type */
         return new ArrayIterator($this->map);
+    }
+
+    #[Override]
+    public function count(): int
+    {
+        return count($this->map);
     }
 }
