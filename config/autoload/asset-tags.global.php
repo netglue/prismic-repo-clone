@@ -34,4 +34,5 @@ return [
     'assetTagMap' => [],
     'searchAssetAltTextForTags' => false,
     'searchAssetNotesForTags' => false,
+    'searchAssetTitlesForTags' => false,
 ];

@@ -31,6 +31,7 @@ final readonly class CopyAssetFactory
             dict(non_empty_string(), vec(non_empty_string()))->assert(Dot::array('assetTagMap', $config)),
             Dot::bool('searchAssetAltTextForTags', $config),
             Dot::bool('searchAssetNotesForTags', $config),
+            Dot::bool('searchAssetTitlesForTags', $config),
         );
     }
 }

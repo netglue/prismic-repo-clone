@@ -47,6 +47,7 @@ final readonly class CopyAsset
         private array $assetTags,
         private bool $searchAssetAltTextForTags,
         private bool $searchAssetNotesForTags,
+        private bool $searchAssetTitlesForTags,
     ) {
     }
 
@@ -150,6 +151,7 @@ final readonly class CopyAsset
             $tags,
             $this->extractTagsFromNotes($asset),
             $this->extractTagsFromAltText($asset),
+            $this->extractTagsFromAssetTitle($asset),
         )));
     }
 
@@ -171,6 +173,16 @@ final readonly class CopyAsset
         }
 
         return $this->extractTagsFromText($asset->alt);
+    }
+
+    /** @return list<non-empty-string> */
+    private function extractTagsFromAssetTitle(Asset $asset): array
+    {
+        if ($this->searchAssetTitlesForTags === false || $asset->filename === '') {
+            return [];
+        }
+
+        return $this->extractTagsFromText($asset->filename);
     }
 
     /**
