@@ -10,6 +10,7 @@ use League\MimeTypeDetection\MimeTypeDetector;
 use Prismic\Cloner\Asset\AssetMapper;
 use Prismic\Cloner\Asset\AssetMapperFactory;
 use Prismic\Cloner\Asset\CopyAsset;
+use Prismic\Cloner\Asset\CopyAssetFactory;
 use Prismic\Cloner\DocumentType\CloneDocumentTypes;
 use Prismic\Cloner\DocumentType\CloneDocumentTypesFactory;
 use Prismic\Cloner\DocumentType\DocumentTypes;
@@ -19,12 +20,12 @@ use Prismic\Cloner\Migration\DefaultTitleResolver;
 use Prismic\Cloner\Migration\DocumentMigrationTracker;
 use Prismic\Cloner\Migration\DocumentMigrator;
 use Prismic\Cloner\Migration\DocumentPatchTracker;
+use Prismic\Cloner\Migration\DocumentPostProcessor;
 use Prismic\Cloner\Migration\Factory\DocumentMigrationTrackerFactory;
 use Prismic\Cloner\Migration\Factory\DocumentMigratorFactory;
 use Prismic\Cloner\Migration\Factory\DocumentPatchTrackerFactory;
 use Prismic\Cloner\Migration\Factory\DocumentPostProcessorFactory;
 use Prismic\Cloner\Migration\Factory\TitleResolverFactory;
-use Prismic\Cloner\Migration\DocumentPostProcessor;
 use Prismic\Cloner\Migration\ResolveSinglesToTypeLabel;
 use Prismic\Cloner\Migration\TitleResolver;
 use Prismic\Cloner\PathConfig;
@@ -46,7 +47,7 @@ return [
 
             // Main tooling services
             PathConfig::class => PathConfigFactory::class,
-            CopyAsset::class => ReflectionBasedAbstractFactory::class,
+            CopyAsset::class => CopyAssetFactory::class,
             AssetMapper::class => AssetMapperFactory::class,
             CloneDocumentTypes::class => CloneDocumentTypesFactory::class,
             DocumentTypes::class => DocumentTypesFactory::class,

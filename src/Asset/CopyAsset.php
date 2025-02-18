@@ -17,10 +17,15 @@ use Throwable;
 
 use function array_find;
 use function array_map;
+use function array_merge;
+use function array_unique;
+use function array_values;
 use function basename;
 use function is_string;
 use function parse_url;
 use function pathinfo;
+use function preg_match;
+use function preg_quote;
 use function Psl\Type\non_empty_string;
 use function Psl\Type\null;
 use function Psl\Type\union;
@@ -33,11 +38,15 @@ use const PHP_URL_PATH;
 /** @psalm-api */
 final readonly class CopyAsset
 {
+    /** @param array<non-empty-string, list<non-empty-string>> $assetTags */
     public function __construct(
         private ClientInterface $httpClient,
         private RequestFactoryInterface $requestFactory,
         private UriFactoryInterface $uriFactory,
         private MimeTypeDetector $mimeTypeDetector,
+        private array $assetTags,
+        private bool $searchAssetAltTextForTags,
+        private bool $searchAssetNotesForTags,
     ) {
     }
 
@@ -53,7 +62,7 @@ final readonly class CopyAsset
             ));
         }
 
-        $tags = array_map(static fn (AssetTag $tag): string => $tag->name, $asset->tags);
+        $tags = $this->resolveTags($asset);
 
         return $uploadClient->uploadAsset(
             $fileContent,
@@ -130,5 +139,62 @@ final readonly class CopyAsset
                 (string) $uri,
             ), (int) $e->getCode(), $e);
         }
+    }
+
+    /** @return list<non-empty-string> */
+    private function resolveTags(Asset $asset): array
+    {
+        $tags = array_map(static fn (AssetTag $tag): string => $tag->name, $asset->tags);
+
+        return array_values(array_unique(array_merge(
+            $tags,
+            $this->extractTagsFromNotes($asset),
+            $this->extractTagsFromAltText($asset),
+        )));
+    }
+
+    /** @return list<non-empty-string> */
+    private function extractTagsFromNotes(Asset $asset): array
+    {
+        if ($this->searchAssetNotesForTags === false || $asset->notes === null || $asset->notes === '') {
+            return [];
+        }
+
+        return $this->extractTagsFromText($asset->notes);
+    }
+
+    /** @return list<non-empty-string> */
+    private function extractTagsFromAltText(Asset $asset): array
+    {
+        if ($this->searchAssetAltTextForTags === false || $asset->alt === null || $asset->alt === '') {
+            return [];
+        }
+
+        return $this->extractTagsFromText($asset->alt);
+    }
+
+    /**
+     * @param non-empty-string $source
+     *
+     * @return list<non-empty-string>
+     */
+    private function extractTagsFromText(string $source): array
+    {
+        if ($this->assetTags === []) {
+            return [];
+        }
+
+        $tags = [];
+
+        foreach ($this->assetTags as $search => $apply) {
+            $pattern = sprintf('/\b%s\b/i', preg_quote($search, '/'));
+            if (! (bool) preg_match($pattern, $source)) {
+                continue;
+            }
+
+            $tags = array_merge($tags, $apply);
+        }
+
+        return array_values(array_unique($tags));
     }
 }

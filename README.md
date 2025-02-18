@@ -22,6 +22,8 @@ You know how to do this already right?
 
 Copy the [`./example.env.dist`](./example.env.dist) file to `./.env` and fill out the relevant details. You only need to supply _read_ tokens if your repository requires them. _Write_ tokens are mandatory for both source and target, but no writes happen on the source.
 
+If you need to make other configuration changes, create a file called `whatever.local.php` in `./config/autoload/` and return a regular array with the desired config. `*.local.*` is git-ignored along with `.env`.
+
 On your **source** repo, make sure that any documents you want to be cloned have been published. Un-published docs, or docs published to releases will not be copied.
 
 ### Run
@@ -37,3 +39,7 @@ php bin/run.php
 - _All_ source documents are downloaded at the **master ref**.
 - Works through source documents one at a time, adjusting image identifiers and sends the data to the target migration release.
 - Once all documents are processed, all internal document links are updated to point at the new equivalent document.
+
+## Auto-tagging assets based on alt text or private notes
+
+There's a feature you can enable to automatically tag assets as they are copied. For more details, look at the [`asset-tags.global.php`](./config/autoload/asset-tags.global.php) file
