@@ -34,5 +34,8 @@ return [
 
         // Where cached document json is persisted per repository
         'document-cache-directory-name' => 'documents',
+
+        // Where we record how many documents make use of an asset
+        'asset-usage-filename' => 'asset-usage.json',
     ],
 ];

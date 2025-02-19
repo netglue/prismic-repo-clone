@@ -20,6 +20,7 @@ final readonly class PathConfig
      * @param non-empty-string $documentMigrationTrackerFilename
      * @param non-empty-string $documentCacheDirectoryName
      * @param non-empty-string $patchTrackerFileName
+     * @param non-empty-string $assetUsageFileName
      */
     public function __construct(
         public string $dataDirectory,
@@ -30,6 +31,7 @@ final readonly class PathConfig
         public string $documentMigrationTrackerFilename,
         public string $documentCacheDirectoryName,
         public string $patchTrackerFileName,
+        public string $assetUsageFileName,
     ) {
     }
 
@@ -113,6 +115,17 @@ final readonly class PathConfig
             $this->dataDirectory,
             DIRECTORY_SEPARATOR,
             $this->documentCacheDirectoryName,
+        );
+    }
+
+    /** @return non-empty-string */
+    public function assetUsageFilePath(): string
+    {
+        return sprintf(
+            '%s%s%s',
+            $this->dataDirectory,
+            DIRECTORY_SEPARATOR,
+            $this->assetUsageFileName,
         );
     }
 

@@ -25,6 +25,7 @@ final readonly class PathConfigFactory
             Dot::nonEmptyString('app.doc-migration-tracker-filename', $config),
             Dot::nonEmptyString('app.document-cache-directory-name', $config),
             Dot::nonEmptyString('app.patch-tracker-filename', $config),
+            Dot::nonEmptyString('app.asset-usage-filename', $config),
         );
 
         $paths->createDirectories();

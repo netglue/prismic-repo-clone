@@ -11,6 +11,10 @@ use Prismic\Cloner\Asset\AssetMapper;
 use Prismic\Cloner\Asset\AssetMapperFactory;
 use Prismic\Cloner\Asset\CopyAsset;
 use Prismic\Cloner\Asset\CopyAssetFactory;
+use Prismic\Cloner\Asset\DeleteUnusedAssets;
+use Prismic\Cloner\Asset\DeleteUnusedAssetsFactory;
+use Prismic\Cloner\Asset\UsageTracker;
+use Prismic\Cloner\Asset\UsageTrackerFactory;
 use Prismic\Cloner\DocumentType\CloneDocumentTypes;
 use Prismic\Cloner\DocumentType\CloneDocumentTypesFactory;
 use Prismic\Cloner\DocumentType\DocumentTypes;
@@ -53,6 +57,8 @@ return [
             DocumentTypes::class => DocumentTypesFactory::class,
             DocumentMigrationTracker::class => DocumentMigrationTrackerFactory::class,
             DocumentMigrator::class => DocumentMigratorFactory::class,
+            UsageTracker::class => UsageTrackerFactory::class,
+            DeleteUnusedAssets::class => DeleteUnusedAssetsFactory::class,
 
             // Tools for figuring out the document title
             DefaultTitleResolver::class => ReflectionBasedAbstractFactory::class,
